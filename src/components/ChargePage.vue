@@ -43,7 +43,7 @@ export default {
   },
   created() {
     let user = firebase.auth().currentUser;
-    this.controller = this.$route.controller;
+    this.controller = this.$route.params.controller;
     console.log("controller = ", this.controller)
     if (user) {
       let docRef = db.collection("users").doc(user.uid);
