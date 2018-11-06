@@ -1,11 +1,34 @@
 <template>
     <div>
-        <h5 style="font-weight: bold;">Start Charging</h5>
-      <p>_____________________________________________________</p>
-      <div id="feedbackDiv"></div>
-    <div>      
-      <h3 style="font-weight: bold;">My Credits: {{ credits }}</h3>
-      <div>
+      <h3 style="font-weight: bold; text-align: center;">My Credits: {{ credits }}</h3>
+      <div style="width: 100%; border: 1px solid black; padding: 10px 20px; margin: 0 0 5% 0;">Jamba kiosk (11)</div>
+      <div>Select device</div>
+        <p>          
+          <label for="test1">
+            <input style="font-size: 16px;" class="with-gap" name="group1" type="radio" id="test1" checked />
+            <span style="font-size: 16px;">This phone</span>
+          </label>
+        </p>
+        <p>          
+          <label for="test2">
+            <input style="font-size: 16px;" class="with-gap" name="group1" type="radio" id="test2" />
+            <span style="font-size: 16px;">General access</span>
+          </label>
+        </p>
+          <div>Have you already pluggen in your device?</div>
+        <p>          
+          <label for="test3">
+            <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test3" checked />
+            <span style="font-size: 16px;">Yes</span>
+          </label>
+        </p>
+        <p>          
+          <label for="test4">
+            <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test4" />
+            <span style="font-size: 16px;">No</span>
+          </label>
+        </p>
+      <!-- <div>
         <button class="smallButton" @click="startCharging(1)">Open Port 1</button>
         <button class="smallButton" @click="startCharging(2)">Open Port 2</button>
         <button class="smallButton" @click="startCharging(3)">Open Port 3</button>
@@ -17,15 +40,14 @@
         <button class="smallButton" @click="stopCharging(3)">Close Port 3</button>
         <button class="smallButton" @click="stopCharging(4)">Close Port 4</button>
       </div>
-      <p id="output"></p>      
-    <div>
-        <button class="button2" @click="startCharge">Cancel</button>
-        </div>
-        <div>
+      <p id="output"></p> -->   
+        <div class="buttonDiv">
           <button id="purchaseButton" class="button4" @click="removeCredits(-1)">Remove credits</button>
+        </div>   
+        <div class="buttonDiv">
+          <button class="button2" @click="startCharge">Cancel</button>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -38,13 +60,14 @@ export default {
   data() {
     return {
       controller: null,
+      status: 'not_accepted',
       credits: this.credits
     };
   },
   created() {
     let user = firebase.auth().currentUser;
     this.controller = this.$route.params.controller;
-    console.log("controller = ", this.controller)
+    console.log("controller = ", this.controller);
     if (user) {
       let docRef = db.collection("users").doc(user.uid);
 
@@ -66,6 +89,9 @@ export default {
   },
   computed: {},
   methods: {
+    update() {
+
+    },
     removeCredits(n) {
       let user = firebase.auth().currentUser;
       console.log("credits: " + this.credits);
@@ -117,6 +143,18 @@ export default {
         output.innerHTML = "You are connected to " + controllerName;
       }
     }
-  }
+  },
 };
 </script>
+<style scoped>
+* {
+  font-size: 20px;
+  text-align: left;
+}
+.buttonDiv {
+  text-align: center;
+}
+button {
+  text-align: center;
+}
+</style>
