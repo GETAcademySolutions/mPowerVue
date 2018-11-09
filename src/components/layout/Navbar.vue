@@ -2,7 +2,7 @@
   <div ref="myNavBar" class="navbar">
     <nav class="green">
       <div class="nav-wrapper">
-        <img src="../../assets/logo.png" class="" style="width:21%; height:100%;"/>
+        <img src="../../assets/logo.png" class="" style="height:100%;"/>
         <a href="#" class="sidenav-trigger right"><i class="material-icons" style="visibility: hidden;">menu</i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
@@ -76,6 +76,15 @@ export default {
           console.log("Error getting document:", error);
         });
     }
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = user;
+        this.credits = credits;
+      } else {
+        this.user = null;
+        this.credits = null;
+      }
+    })
   },
   computed: {},
   methods: {
@@ -128,27 +137,12 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user;
+        this.credits = credits;
       } else {
         this.user = null;
+        this.credits = null;
       }
-    }),
-      (this.user = firebase.auth().currentUser);
-    var docRef = db.collection("users").doc(this.user.uid);
-
-    docRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-          this.credits = doc.data().credits;
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+    })
     // let elems = document.querySelectorAll('.sidenav');
     // let instances = M.Sidenav.init(elems, options);
     M.AutoInit(); // That way, it is only initialized when the component is mounted
