@@ -27,7 +27,7 @@
           <li id="liNr2" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
           <li id="liNr3" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Index' }">Index</router-link></li>
           <li id="liNr4" class="sidenav-close" v-if="user"><a>{{ user.email }}</a></li>
-          <li id="liNr4" class="sidenav-close" v-if="user"><a>{{ credits }}</a></li>
+          <li id="liNr4" class="sidenav-close" v-if="user"><a>Credits: {{ credits }}</a></li>
           <li id="liNr6" class="sidenav-close" v-if="user"><a @click="home">Home</a></li>
           <li id="liNr7" class="sidenav-close" v-if="user"><a @click="startChargePage">Charge</a></li>
           <li id="liNr8" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Store</a></li>
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       user: null,
-      credits: this.credits
+      credits: null
     };
   },
   created() {

@@ -43,9 +43,6 @@
       <p id="output"></p> -->   
       <div id="creditOutput"></div>
         <div class="buttonDiv">
-          <button id="purchaseButton" class="button4" @click="removeCredits(-1)">Remove credits</button>
-        </div>  
-        <div class="buttonDiv">
           <button id="portSite" class="button4" @click="portNumberPage">Charge</button>
         </div>   
         <div class="buttonDiv">
@@ -93,25 +90,6 @@ export default {
   },
   computed: {},
   methods: {
-    removeCredits(n) {
-      let user = firebase.auth().currentUser;
-      console.log("credits: " + this.credits);
-      if (this.credits > 0) {
-        db.collection("users")
-          .doc(user.uid)
-          .set({ credits: (this.credits += n) }, { merge: true })
-          .then(function() {
-            console.log("Credits successfully changed by: " + n);
-          })
-          .catch(function(error) {
-            console.error("Error writing document: ", error);
-          });
-      } else {
-        document.getElementById("creditOutput").innerHTML =
-          "Insufficient credits";
-        document.getElementById("purchaseButton").style.visibility = "hidden";
-      }
-    },
     startCharge() {
       this.$router.push({ name: "StartCharge" });
     },
@@ -124,6 +102,7 @@ export default {
         return;
       }
       let port = p >= 10 ? p : "0" + p;
+      if (port == null) {port = "ff";}
       await this.controller.turnOnOrOff(port, "01");
       const result = await this.controller.readValue();
       output.innerHTML += "<br />" + result;
@@ -134,6 +113,7 @@ export default {
         return;
       }
       let port = p >= 10 ? p : "0" + p;
+      if (port == null) {port = "ff";}
       await this.controller.turnOnOrOff(port, "00");
       const result = await this.controller.readValue();
       output.innerHTML += "<br />" + result;

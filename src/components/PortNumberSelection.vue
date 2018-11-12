@@ -1,15 +1,97 @@
 <template>
     <div>
+        <h4>{{credits}}</h4>
         <h3>Enter port number</h3>
         <p>If your device is already plugged into the port, write the port number below</p>
+        <p id="output"></p>
         <input type="text" placeholder="Port number" />
-        <button class="button4">Connect</button>
+        <div id="buttonDiv">
+        <button class="button4" @click="removeCredits(-1)">Connect</button> 
+        <button class="smallButton" @click="startCharging(1)">Credit test</button> 
+        <button class="smallButton" @click="startCharging(2)">Credit test</button> 
+        <button class="smallButton" @click="startCharging(3)">Credit test</button> 
+        <button class="smallButton" @click="startCharging(4)">Credit test</button> 
+        </div>
     </div>
 </template>
 
 <script>
+import db from "@/firebase/init";
+import firebase from "firebase";
 export default {
+  data() {
+    return {
+      credits: this.credits
+      };
+  },
+  created() {
+    let user = firebase.auth().currentUser;
+    this.controller = this.$route.params.controller;
+    console.log("controller = ", this.controller);
+    if (user) {
+      let docRef = db.collection("users").doc(user.uid);
 
+      docRef
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            console.log("got credits: ", doc.data().credits);
+            this.credits = doc.data().credits;
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  },
+methods: {
+    removeCredits(n) {
+      let user = firebase.auth().currentUser;
+      console.log("credits: " + this.credits);
+      if (this.credits > 0) {
+        db.collection("users")
+          .doc(user.uid)
+          .set({ credits: (this.credits += n) }, { merge: true })
+          .then(function() {
+            console.log("Credits successfully changed by: " + n);
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+      } else {
+        document.getElementById("creditOutput").innerHTML =
+          "Insufficient credits";
+        document.getElementById("purchaseButton").style.visibility = "hidden";
+      }
+      this.$router.push({ name: "StartCharge" });
+      alert("You succsessfully purchased one loading session, lasting 24 hours for 1 credits!")
+    },
+    async startCharging(p) {
+      if (!this.controller.isConnected) {
+        output.innerHTML = "You're not connected, please reconnect";
+        return;
+      }
+      let port = p >= 10 ? p : "0" + p;
+      if (port == null) {port = "ff";}
+      await this.controller.turnOnOrOff(port, "01");
+      const result = await this.controller.readValue();
+      output.innerHTML += "<br />" + result;
+    },
+    // async stopCharging(p) {
+    //   if (!this.controller.isConnected) {
+    //     output.innerHTML = "You're not connected, please reconnect";
+    //     return;
+    //   }
+    //   let port = p >= 10 ? p : "0" + p;
+    //   if (port == null) {port = "ff";}
+    //   await this.controller.turnOnOrOff(port, "00");
+    //   const result = await this.controller.readValue();
+    //   output.innerHTML += "<br />" + result;
+    // }
+  }
 }
 </script>
 
@@ -20,7 +102,11 @@ export default {
 p {
     font-size: 20px;
 }
-button {
+#buttonDiv, button, h4 {
     text-align: center;
+}
+::placeholder {
+    color: rgba(20, 20, 20, 1);
+
 }
 </style>
