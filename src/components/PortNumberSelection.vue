@@ -4,13 +4,10 @@
         <h3>Enter port number</h3>
         <p>If your device is already plugged into the port, write the port number below</p>
         <p id="output"></p>
-        <input type="text" placeholder="Port number" />
+        <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
         <button class="button4" @click="removeCredits(-1)">Connect</button> 
-        <button class="smallButton" @click="startCharging(1)">Credit test</button> 
-        <button class="smallButton" @click="startCharging(2)">Credit test</button> 
-        <button class="smallButton" @click="startCharging(3)">Credit test</button> 
-        <button class="smallButton" @click="startCharging(4)">Credit test</button> 
+        <button class="button1" @click="startCharging(1)">Credit test</button> <!-- (portNumber elns) -->
         </div>
     </div>
 </template>
@@ -18,11 +15,12 @@
 <script>
 import db from "@/firebase/init";
 import firebase from "firebase";
+import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 export default {
   data() {
     return {
       credits: this.credits
-      };
+    };
   },
   created() {
     let user = firebase.auth().currentUser;
@@ -47,7 +45,7 @@ export default {
         });
     }
   },
-methods: {
+  methods: {
     removeCredits(n) {
       let user = firebase.auth().currentUser;
       console.log("credits: " + this.credits);
@@ -67,7 +65,9 @@ methods: {
         document.getElementById("purchaseButton").style.visibility = "hidden";
       }
       this.$router.push({ name: "StartCharge" });
-      alert("You succsessfully purchased one loading session, lasting 24 hours for 1 credits!")
+      alert(
+        "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
+      );
     },
     async startCharging(p) {
       if (!this.controller.isConnected) {
@@ -75,11 +75,13 @@ methods: {
         return;
       }
       let port = p >= 10 ? p : "0" + p;
-      if (port == null) {port = "ff";}
+      if (port == null) {
+        port = "ff";
+      }
       await this.controller.turnOnOrOff(port, "01");
       const result = await this.controller.readValue();
       output.innerHTML += "<br />" + result;
-    },
+    }
     // async stopCharging(p) {
     //   if (!this.controller.isConnected) {
     //     output.innerHTML = "You're not connected, please reconnect";
@@ -92,21 +94,22 @@ methods: {
     //   output.innerHTML += "<br />" + result;
     // }
   }
-}
+};
 </script>
 
 <style scoped>
 * {
-    text-align: left;
+  text-align: left;
 }
 p {
-    font-size: 20px;
+  font-size: 20px;
 }
-#buttonDiv, button, h4 {
-    text-align: center;
+#buttonDiv,
+button,
+h4 {
+  text-align: center;
 }
 ::placeholder {
-    color: rgba(20, 20, 20, 1);
-
+  color: rgba(20, 20, 20, 1);
 }
 </style>
