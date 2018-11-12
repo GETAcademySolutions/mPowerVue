@@ -13,6 +13,7 @@ import ConfirmedPurchase from '@/components/ConfirmedPurchase';
 import UserHistory from '@/components/UserHistory';
 import MPowerMap from '@/components/MPowerMap';
 import ChargePage from '@/components/ChargePage';
+import PortNumberSelection from '@/components/PortNumberSelection';
 
 Vue.use(Router);
 
@@ -72,6 +73,11 @@ const router = new Router({
       path: '/chargePage',
       name: 'ChargePage',
       component: ChargePage
+    },
+    {
+      path: '/portNumberSelection',
+      name: 'PortNumberSelection',
+      component: PortNumberSelection
     }
   ]
 });

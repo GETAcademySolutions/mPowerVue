@@ -27,7 +27,7 @@
           <li id="liNr2" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
           <li id="liNr3" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Index' }">Index</router-link></li>
           <li id="liNr4" class="sidenav-close" v-if="user"><a>{{ user.email }}</a></li>
-          <li id="liNr5" class="sidenav-close" v-if="user"><a>{{ credits }}</a></li>
+          <li id="liNr4" class="sidenav-close" v-if="user"><a>{{ credits }}</a></li>
           <li id="liNr6" class="sidenav-close" v-if="user"><a @click="home">Home</a></li>
           <li id="liNr7" class="sidenav-close" v-if="user"><a @click="startChargePage">Charge</a></li>
           <li id="liNr8" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Store</a></li>
@@ -76,15 +76,6 @@ export default {
           console.log("Error getting document:", error);
         });
     }
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.user = user;
-        this.credits = credits;
-      } else {
-        this.user = null;
-        this.credits = null;
-      }
-    })
   },
   computed: {},
   methods: {
@@ -142,7 +133,7 @@ export default {
         this.user = null;
         this.credits = null;
       }
-    })
+    });
     // let elems = document.querySelectorAll('.sidenav');
     // let instances = M.Sidenav.init(elems, options);
     M.AutoInit(); // That way, it is only initialized when the component is mounted

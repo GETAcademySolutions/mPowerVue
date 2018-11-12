@@ -54,7 +54,7 @@ form {
   background-color: rgb(150, 150, 150);
   color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .hugeButton:active {
@@ -77,7 +77,7 @@ form {
   background-color: rgb(150, 150, 150);
   color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .button1:active {
@@ -102,7 +102,7 @@ form {
   background-color: #ffffff;
   color: #000000;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .button2:active {
@@ -125,7 +125,7 @@ form {
   background-color: rgb(150, 150, 150);
   color: rgb(240, 240, 240);
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .button3:active {
@@ -150,7 +150,7 @@ form {
   background-color: rgb(0, 150, 50);
   color: rgb(240, 240, 240);
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .button4:active {
@@ -196,20 +196,20 @@ form {
 input {
   padding: 1%;
   padding-left: 2%;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: none;
 }
 
 .containmentDiv {
   margin: 2% 5%;
   border: 1px solid rgb(150, 150, 150);
-  border-radius: 10px;
+  border-radius: 5px;
   min-height: 40px;
 }
 .containmentDivEx {
   margin: 1% 10%;
   border: 1px solid rgb(150, 150, 150);
-  border-radius: 10px;
+  border-radius: 5px;
   min-height: 40px;
 }
 </style>

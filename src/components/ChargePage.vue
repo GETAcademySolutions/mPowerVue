@@ -41,8 +41,12 @@
         <button class="smallButton" @click="stopCharging(4)">Close Port 4</button>
       </div>
       <p id="output"></p> -->   
+      <div id="creditOutput"></div>
         <div class="buttonDiv">
           <button id="purchaseButton" class="button4" @click="removeCredits(-1)">Remove credits</button>
+        </div>  
+        <div class="buttonDiv">
+          <button id="portSite" class="button4" @click="portNumberPage">Charge</button>
         </div>   
         <div class="buttonDiv">
           <button class="button2" @click="startCharge">Cancel</button>
@@ -56,7 +60,7 @@ import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 
 export default {
-  name: "StartCharge",
+  name: "chargePage",
   data() {
     return {
       controller: null,
@@ -89,9 +93,6 @@ export default {
   },
   computed: {},
   methods: {
-    update() {
-
-    },
     removeCredits(n) {
       let user = firebase.auth().currentUser;
       console.log("credits: " + this.credits);
@@ -113,6 +114,9 @@ export default {
     },
     startCharge() {
       this.$router.push({ name: "StartCharge" });
+    },
+    portNumberPage() {
+      this.$router.push({ name: "PortNumberSelection" });
     },
     async startCharging(p) {
       if (!this.controller.isConnected) {
