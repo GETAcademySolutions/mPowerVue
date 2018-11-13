@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="component">
         <h4>{{credits}}</h4>
         <h3>Enter port number</h3>
         <p>If your device is already plugged into the port, write the port number below</p>
@@ -7,7 +7,7 @@
         <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
         <button class="button4" @click="removeCredits(-1)">Connect</button> 
-        <button class="button1" @click="startCharging(1)">Credit test</button> <!-- (portNumber elns) -->
+        <button class="button1" @click="startCharging(2)">Credit test</button> <!-- (portNumber elns) -->
         </div>
     </div>
 </template>
@@ -17,6 +17,7 @@ import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 export default {
+  props: ['controller'],
   data() {
     return {
       credits: this.credits
@@ -64,7 +65,7 @@ export default {
           "Insufficient credits";
         document.getElementById("purchaseButton").style.visibility = "hidden";
       }
-      this.$router.push({ name: "StartCharge" });
+      this.$router.go(-2);
       alert(
         "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
       );
@@ -78,9 +79,9 @@ export default {
       if (port == null) {
         port = "ff";
       }
+      console.log('PORT NUMBER IS: ', p);
       await this.controller.turnOnOrOff(port, "01");
       const result = await this.controller.readValue();
-      output.innerHTML += "<br />" + result;
     }
     // async stopCharging(p) {
     //   if (!this.controller.isConnected) {

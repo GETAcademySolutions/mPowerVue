@@ -1,5 +1,6 @@
 <template>
-  <div class="StartChargePage">      
+  <div class="StartChargePage component">      
+    <keep-alive></keep-alive>
       <div id="feedbackDiv"></div>
       <h3 style="font-weight: bold;">My Credits: {{ credits }}</h3>
       <p id="creditOutput"></p>
@@ -60,8 +61,8 @@ export default {
       if (!this.controller.isConnected) {
         var controllerName = await this.controller.connect();
         output.innerHTML = "You are connected to " + controllerName;
-          this.$router.push({ name: "ChargePage", params: {controller: this.controller} });
       }
+      this.$router.push({ name: "ChargePage", params: {controller: this.controller} });
     }
   }
 };

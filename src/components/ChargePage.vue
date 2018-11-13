@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="component">
       <h3 style="font-weight: bold; text-align: center;">My Credits: {{ credits }}</h3>
       <div style="width: 100%; border: 1px solid black; padding: 10px 20px; margin: 0 0 5% 0;">Jamba kiosk (11)</div>
       <div>Select device</div>
@@ -58,11 +58,11 @@ import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 
 export default {
   name: "chargePage",
+  props: ['controller'],
   data() {
     return {
-      controller: null,
       status: 'not_accepted',
-      credits: this.credits
+      credits: null
     };
   },
   created() {
@@ -91,43 +91,12 @@ export default {
   computed: {},
   methods: {
     startCharge() {
-      this.$router.push({ name: "StartCharge" });
+      this.$router.push({ name: "StartCharge", params: {controller: this.controller} });
     },
     portNumberPage() {
-      this.$router.push({ name: "PortNumberSelection" });
-    },
-    async startCharging(p) {
-      if (!this.controller.isConnected) {
-        output.innerHTML = "You're not connected, please reconnect";
-        return;
-      }
-      let port = p >= 10 ? p : "0" + p;
-      if (port == null) {port = "ff";}
-      await this.controller.turnOnOrOff(port, "01");
-      const result = await this.controller.readValue();
-      output.innerHTML += "<br />" + result;
-    },
-    async stopCharging(p) {
-      if (!this.controller.isConnected) {
-        output.innerHTML = "You're not connected, please reconnect";
-        return;
-      }
-      let port = p >= 10 ? p : "0" + p;
-      if (port == null) {port = "ff";}
-      await this.controller.turnOnOrOff(port, "00");
-      const result = await this.controller.readValue();
-      output.innerHTML += "<br />" + result;
+      this.$router.push({ name: "PortNumberSelection", params: {controller: this.controller} });
     }
-  },
-  updated: {
-    async connectToBluetooth() {
-      console.log(this.controller);
-      if (!this.controller.isConnected) {
-        var controllerName = await this.controller.connect();
-        output.innerHTML = "You are connected to " + controllerName;
-      }
-    }
-  },
+  }
 };
 </script>
 <style scoped>
