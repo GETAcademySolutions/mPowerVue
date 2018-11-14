@@ -14,12 +14,15 @@ import UserHistory from '@/components/UserHistory';
 import MPowerMap from '@/components/MPowerMap';
 import ChargePage from '@/components/ChargePage';
 import PortNumberSelection from '@/components/PortNumberSelection';
+import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 
 Vue.use(Router);
 
+const controller = new mPowerBluetoothController();
+//const controller = new mPowerBluetoothControllerDummy();
+
 const router = new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'Index',
       component: Index
@@ -37,7 +40,7 @@ const router = new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home    
+      component: Home
     },
     {
       path: '/chargeStore',
@@ -46,6 +49,10 @@ const router = new Router({
     },
     {
       path: '/startChargePage',
+      props: {
+        default: true,
+        controller: controller
+      },
       name: 'StartCharge',
       component: StartCharge
     },
@@ -85,7 +92,7 @@ const router = new Router({
 // router guards
 router.beforeEach((to, from, next) => {
   // check to see if route has auth guard
-  if(to.matched.some(rec => rec.meta.requiresAuth)){
+  if (to.matched.some(rec => rec.meta.requiresAuth)) {
     // check auth state of user
     let user = firebase.auth().currentUser;
     if (user) {

@@ -91,7 +91,7 @@ export default {
   computed: {},
   methods: {
     startCharge() {
-      this.$router.push({ name: "StartCharge", params: {controller: this.controller} });
+      this.$router.push({ name: "StartCharge"});
     },
     portNumberPage() {
       this.$router.push({ name: "PortNumberSelection", params: {controller: this.controller} });

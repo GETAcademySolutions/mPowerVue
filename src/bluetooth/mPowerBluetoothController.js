@@ -9,6 +9,32 @@ await controller.connect();
 
  */
 
+class mPowerBluetoothControllerDummy {
+
+
+    constructor() {
+        this.serviceUuid = '0000f00d-1212-efde-1523-785fef13d123';
+        this.options = {
+            filters: [{ name: "mPower" }, { services: [this.serviceUuid] }],
+            optionalService: [this.serviceUuid]
+        };
+        this.characteristicUuid = "0000beef-1212-efde-1523-785fef13d123";
+        this.isConnected = false;
+    }
+    
+    async connect() {
+    }
+
+    async turnOnOrOff(portNo, OnOffValue) {
+        console.log('dummy ble turnOnOrOff', portNo, OnOffValue);
+    }
+
+    async readValue() {
+        return 5;
+    }
+}
+
+
  /*jshint esversion: 6 */
 class mPowerBluetoothController {
 

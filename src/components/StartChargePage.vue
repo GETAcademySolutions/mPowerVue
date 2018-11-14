@@ -23,13 +23,11 @@ import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 export default {
   name: "StartCharge",
   data() {
-    const x = new mPowerBluetoothController();
-    console.log("creating controller", x);
-    return { 
-      controller: x,
+    return {
       credits: this.credits
     };
   },
+  props: ['controller'],
   created() {
     let user = firebase.auth().currentUser;
     if (user) {
@@ -62,7 +60,10 @@ export default {
         var controllerName = await this.controller.connect();
         output.innerHTML = "You are connected to " + controllerName;
       }
-      this.$router.push({ name: "ChargePage", params: {controller: this.controller} });
+      this.$router.push({
+        name: "ChargePage",
+        params: { controller: this.controller }
+      });
     }
   }
 };
