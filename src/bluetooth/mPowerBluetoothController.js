@@ -71,5 +71,5 @@ class mPowerBluetoothController {
         return await characteristic.readValue();
     }
 }
-export default mPowerBluetoothController;
-//export default mPowerBluetoothControllerDummy;
+//export default mPowerBluetoothController;
+export default mPowerBluetoothControllerDummy;

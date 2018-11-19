@@ -18,10 +18,10 @@ import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 export default {
-  props: ['controller'],
+  props: ["controller"],
   data() {
     return {
-      credits: this.credits,
+      credits: this.credits
     };
   },
   created() {
@@ -69,20 +69,22 @@ export default {
           "Insufficient credits";
         document.getElementById("purchaseButton").style.visibility = "hidden";
       }
-      let p = document.getElementById('portNumber').value;
+      let p = document.getElementById("portNumber").value;
       let port = p >= 10 ? p : "0" + p;
-      if (port == "0" || port ==  null) {
+      if (port == "0" || port == null) {
         port = "ff";
       }
-      console.log('PORT NUMBER IS: ', p);
+      console.log("PORT NUMBER IS: ", p);
       await this.controller.turnOnOrOff(port, "01");
       const result = await this.controller.readValue();
-      output.innerHTML = port + " 01"
-      output.innerHTML += "<br />" + result
-      this.$router.go(-2);
-      alert(
-        "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
-      );
+      // const result = port + " 01";
+      output.innerHTML = "Connected to port " + port + " 01";
+      output.innerHTML += "<br />" + result;
+      if (p <= 4) {
+        this.$router.go(-2);
+        output.innerHTML +=
+          "<br /> You succsessfully purchased one loading session, lasting 24 hours for 1 credits!";
+      }
     }
   }
 };
