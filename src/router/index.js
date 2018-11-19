@@ -14,12 +14,13 @@ import UserHistory from '@/components/UserHistory';
 import MPowerMap from '@/components/MPowerMap';
 import ChargePage from '@/components/ChargePage';
 import PortNumberSelection from '@/components/PortNumberSelection';
-import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
+//import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
+import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 
 Vue.use(Router);
 
-const controller = new mPowerBluetoothController();
-//const controller = new mPowerBluetoothControllerDummy();
+//const controller = new mPowerBluetoothController();
+const controller = new mPowerBluetoothControllerDummy();
 
 const router = new Router({
   routes: [{

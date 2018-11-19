@@ -23,22 +23,18 @@
 
       <div class="nav-wrapper">
         <ul class="sidenav" id="mobile-demo">
-          <li class="divider green" style="height: 2px;" v-if="!user"></li>
           <li id="liNr1" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Signup' }">Signup</router-link></li>
           <li id="liNr2" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
           <li id="liNr3" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Index' }">Index</router-link></li>
-          <li class="divider green" style="height: 3.5px;" v-if="!user"></li>
-          <li class="divider green" style="height: 2px;" v-if="user"></li>
           <li id="liNr4" class="sidenav-close" v-if="user"><a @click="home">{{ user.email }}</a></li>
           <li id="liNr4" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Credits: {{ credits }}</a></li>
-          <li class="divider green" style="height: 3.5px;" v-if="user"></li>
+          <li class="divider green" style="height: 1px;" v-if="user"></li>
           <li id="liNr6" class="sidenav-close" v-if="user"><a @click="home">Home</a></li>
           <li id="liNr7" class="sidenav-close" v-if="user"><a @click="startChargePage">Charge</a></li>
           <li id="liNr8" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Store</a></li>
           <li id="liNr9" class="sidenav-close" v-if="user"><a @click="userHistory">History</a></li>
           <li id="liNr10" class="sidenav-close" v-if="user"><a @click="mPowerMap">Map</a></li>
           <li id="liNr11" class="sidenav-close" v-if="user"><a @click="logout">Logout</a></li>
-          <li class="divider green" style="height: 3.5px;" v-if="user"></li>
         </ul>
       </div>
   </div>

@@ -37,7 +37,6 @@ export default {
         .get()
         .then(doc => {
           if (doc.exists) {
-            console.log("got credits: ", doc.data().credits);
             this.credits = doc.data().credits;
           } else {
             // doc.data() will be undefined in this case
@@ -53,7 +52,6 @@ export default {
   methods: {
     confirmedPurchase(n) {
       let user = firebase.auth().currentUser;
-      console.log("credits: " + this.credits);
       db.collection("users")
         .doc(user.uid)
         .set({ credits: this.credits += n }, { merge: true })

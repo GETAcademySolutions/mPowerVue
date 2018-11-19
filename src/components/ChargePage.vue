@@ -55,6 +55,7 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
+//import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 
 export default {
   name: "chargePage",
@@ -76,7 +77,6 @@ export default {
         .get()
         .then(doc => {
           if (doc.exists) {
-            console.log("got credits: ", doc.data().credits);
             this.credits = doc.data().credits;
           } else {
             // doc.data() will be undefined in this case

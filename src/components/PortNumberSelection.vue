@@ -7,7 +7,7 @@
         <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
         <button class="button4" @click="removeCredits(-1)">Connect</button> 
-        <button class="button1" @click="startCharging(2)">Credit test</button> <!-- (portNumber elns) -->
+        <button class="button1" @click="startCharging(3)">Credit test</button> <!-- (portNumber elns) -->
         </div>
     </div>
 </template>
@@ -16,6 +16,7 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
+//import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 export default {
   props: ['controller'],
   data() {
@@ -34,7 +35,6 @@ export default {
         .get()
         .then(doc => {
           if (doc.exists) {
-            console.log("got credits: ", doc.data().credits);
             this.credits = doc.data().credits;
           } else {
             // doc.data() will be undefined in this case
