@@ -55,7 +55,7 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
-//import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
+import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 
 export default {
   name: "chargePage",
@@ -95,7 +95,31 @@ export default {
     },
     portNumberPage() {
       this.$router.push({ name: "PortNumberSelection", params: {controller: this.controller} });
-    }
+    },
+    // async startCharging(p) {
+    //   if (!this.controller.isConnected) {
+    //     output.innerHTML = "You're not connected, please reconnect";
+    //     return;
+    //   }
+    //   let port = p >= 10 ? p : "0" + p;
+    //   if (port == null) {
+    //     port = "ff";
+    //   }
+    //   console.log('PORT NUMBER IS: ', p);
+    //   await this.controller.turnOnOrOff(port, "01");
+    //   const result = await this.controller.readValue();
+    // },
+    // async stopCharging(p) {
+    //   if (!this.controller.isConnected) {
+    //     output.innerHTML = "You're not connected, please reconnect";
+    //     return;
+    //   }
+    //   let port = p >= 10 ? p : "0" + p;
+    //   if (port == null) {port = "ff";}
+    //   await this.controller.turnOnOrOff(port, "00");
+    //   const result = await this.controller.readValue();
+    //   output.innerHTML += "<br />" + result;
+    // }
   }
 };
 </script>

@@ -6,8 +6,9 @@
         <p id="output"></p>
         <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
-        <button class="button4" @click="removeCredits(-1)">Connect</button> 
-        <button class="button1" @click="startCharging(3)">Credit test</button> <!-- (portNumber elns) -->
+        <button class="button4" @click="startCharging()">Connect</button> <!-- (portNumber elns) -->
+        <button class="button4" @click="stopCharging()">Disconnect</button>
+        <button class="button4" @click="removeCredits(-1)">Credit test</button> 
         </div>
     </div>
 </template>
@@ -16,7 +17,7 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
-//import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
+import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 export default {
   props: ['controller'],
   data() {
@@ -65,24 +66,43 @@ export default {
           "Insufficient credits";
         document.getElementById("purchaseButton").style.visibility = "hidden";
       }
-      this.$router.go(-2);
+      //this.$router.go(-2);
       alert(
         "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
       );
     },
-    async startCharging(p) {
+    async startCharging() {
       if (!this.controller.isConnected) {
         output.innerHTML = "You're not connected, please reconnect";
         return;
       }
+      let p = document.getElementById('portNumber').value;
       let port = p >= 10 ? p : "0" + p;
-      if (port == null) {
+      if (port == "0" || port ==  null) {
         port = "ff";
       }
       console.log('PORT NUMBER IS: ', p);
       await this.controller.turnOnOrOff(port, "01");
       const result = await this.controller.readValue();
-    }
+      output.innerHTML = port + " 01"
+      output.innerHTML += "<br />" + result
+    },
+    async stopCharging() {
+      if (!this.controller.isConnected) {
+        output.innerHTML = "You're not connected, please reconnect";
+        return;
+      }
+      let p = document.getElementById('portNumber').value;
+      let port = p >= 10 ? p : "0" + p;
+      if (port == "0" || port ==  null) {
+        port = "ff";
+      }
+      console.log('PORT NUMBER IS: ', p);
+      await this.controller.turnOnOrOff(port, "00");
+      const result = await this.controller.readValue();
+      output.innerHTML = port + " 00"
+      output.innerHTML += "<br />" + result
+    },
     // async stopCharging(p) {
     //   if (!this.controller.isConnected) {
     //     output.innerHTML = "You're not connected, please reconnect";

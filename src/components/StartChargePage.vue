@@ -19,7 +19,7 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
-//import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
+import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 
 export default {
   name: "StartCharge",
