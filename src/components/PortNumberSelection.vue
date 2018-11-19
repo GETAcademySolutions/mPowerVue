@@ -2,12 +2,11 @@
     <div class="component">
         <h4>{{credits}}</h4>
         <h3>Enter port number</h3>
-        <p>If your device is already plugged into the port, write the port number below</p>
+        <p>If your device is already plugged into the port, write the port number below.</p>
+        <p>Alternatively, don't type anything to get a random port.</p>
         <p id="output"></p>
         <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
-        <button class="button4" @click="startCharging()">Connect</button> <!-- (portNumber elns) -->
-        <button class="button4" @click="stopCharging()">Disconnect</button>
         <button class="button4" @click="removeCredits(-1)">Credit test</button> 
         </div>
     </div>
@@ -22,7 +21,7 @@ export default {
   props: ['controller'],
   data() {
     return {
-      credits: this.credits
+      credits: this.credits,
     };
   },
   created() {
@@ -48,9 +47,13 @@ export default {
     }
   },
   methods: {
-    removeCredits(n) {
+    async removeCredits(n) {
       let user = firebase.auth().currentUser;
       console.log("credits: " + this.credits);
+      if (!this.controller.isConnected) {
+        output.innerHTML = "You're not connected, please reconnect";
+        return;
+      }
       if (this.credits > 0) {
         db.collection("users")
           .doc(user.uid)
@@ -66,16 +69,6 @@ export default {
           "Insufficient credits";
         document.getElementById("purchaseButton").style.visibility = "hidden";
       }
-      //this.$router.go(-2);
-      alert(
-        "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
-      );
-    },
-    async startCharging() {
-      if (!this.controller.isConnected) {
-        output.innerHTML = "You're not connected, please reconnect";
-        return;
-      }
       let p = document.getElementById('portNumber').value;
       let port = p >= 10 ? p : "0" + p;
       if (port == "0" || port ==  null) {
@@ -86,34 +79,11 @@ export default {
       const result = await this.controller.readValue();
       output.innerHTML = port + " 01"
       output.innerHTML += "<br />" + result
-    },
-    async stopCharging() {
-      if (!this.controller.isConnected) {
-        output.innerHTML = "You're not connected, please reconnect";
-        return;
-      }
-      let p = document.getElementById('portNumber').value;
-      let port = p >= 10 ? p : "0" + p;
-      if (port == "0" || port ==  null) {
-        port = "ff";
-      }
-      console.log('PORT NUMBER IS: ', p);
-      await this.controller.turnOnOrOff(port, "00");
-      const result = await this.controller.readValue();
-      output.innerHTML = port + " 00"
-      output.innerHTML += "<br />" + result
-    },
-    // async stopCharging(p) {
-    //   if (!this.controller.isConnected) {
-    //     output.innerHTML = "You're not connected, please reconnect";
-    //     return;
-    //   }
-    //   let port = p >= 10 ? p : "0" + p;
-    //   if (port == null) {port = "ff";}
-    //   await this.controller.turnOnOrOff(port, "00");
-    //   const result = await this.controller.readValue();
-    //   output.innerHTML += "<br />" + result;
-    // }
+      this.$router.go(-2);
+      alert(
+        "You succsessfully purchased one loading session, lasting 24 hours for 1 credits!"
+      );
+    }
   }
 };
 </script>
