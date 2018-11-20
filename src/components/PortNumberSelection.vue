@@ -80,10 +80,20 @@ export default {
       // const result = port + " 01";
       output.innerHTML = "Connected to port " + port + " 01";
       output.innerHTML += "<br />" + result;
+      const ack = await this.controller.characteristic.readValue();
+      //const ack2 = ack.buffer;
+      var myData = ack;
+      console.log("VIKTIG MELDING: ", ack);
+
+      //console.log("VIKTIG MELDING2: ", ack2);
       if (p <= 4) {
-        this.$router.go(-2);
+        //this.$router.go(-2);
         output.innerHTML +=
           "<br /> You succsessfully purchased one loading session, lasting 24 hours for 1 credits!";
+      const success = myData.getUint8(0) === 1;
+      const portNo = myData.getUint8(1);
+      const logTxt = 'port ' + portNo + ': success=' + success;
+      console.log(logTxt);
       }
     }
   }
