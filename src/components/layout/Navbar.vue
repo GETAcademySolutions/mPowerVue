@@ -4,7 +4,7 @@
       <div class="nav-wrapper">
         <img src="../../assets/logo.png" class="" style="height:100%;"/>
         <a href="#" class="sidenav-trigger right"><i class="material-icons" style="visibility: hidden;">menu</i></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger left" @click="updateCredits"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Signup' }">Signup</router-link></li>
           <li class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
@@ -122,6 +122,27 @@ export default {
         document.getElementById("liNr" + i).style.textDecoration = "none";
       }
       document.getElementById("liNr10").style.textDecoration = "underline";
+    },
+    updateCredits() {      
+    let user = firebase.auth().currentUser;
+    if (user) {
+      let docRef = db.collection("users").doc(user.uid);
+
+      docRef
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            console.log("got credits: ", doc.data().credits);
+            this.credits = doc.data().credits;
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+        });
+    }
     }
   },
   mounted() {

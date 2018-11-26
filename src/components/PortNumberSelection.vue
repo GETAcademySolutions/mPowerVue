@@ -87,7 +87,7 @@ export default {
 
       //console.log("VIKTIG MELDING2: ", ack2);
       if (p <= 4) {
-        //this.$router.go(-2);
+        this.$router.go(-2);
         output.innerHTML +=
           "<br /> You succsessfully purchased one loading session, lasting 24 hours for 1 credits!";
       const success = myData.getUint8(0) === 1;
