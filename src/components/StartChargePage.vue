@@ -6,9 +6,14 @@
       <p id="creditOutput"></p>
       <p id="output"></p>     
         <div class="hugeButton" style="margin-top: 5%; background-color: rgb(0, 150, 50); text-align: left;">
-          <h4>Charge</h4>
+          <h4>Charge with credits</h4>
           <p>Charge any device at your convenience. Unlock a charger at any time with your mobile phone.</p>
           <button id="connectToBluetooth" class="button4" @click="connectToBluetooth" style="border: 2px solid white; width: 100%;">Charge with credits</button>
+        </div>
+        <div class="hugeButton" style="margin-top: 5%; background-color: rgb(255, 255, 255); color: black; border: 1px solid black; text-align: left;">
+          <h4>Charge with code</h4>
+          <p>Pay for charging at one of the mPower stations and get a one time charging code.</p>
+          <button id="connectToBluetooth" class="button4 white" @click="connectToBluetooth" style="border: 2px solid black; color: black; width: 100%;">Charge with code</button>
         </div>
         <button class="button2" @click="home">Back</button>
     </div>
