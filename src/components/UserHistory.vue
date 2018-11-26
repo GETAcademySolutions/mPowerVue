@@ -10,6 +10,9 @@
           Info3                   
         </div>
     <div>
+        <button class="button2" @click="chargingCard">ChargingCard</button>
+        </div>
+    <div>
         <button class="button2" @click="home">Back</button>
         </div>
     </div>
@@ -24,6 +27,9 @@ export default {
   methods: {
     home() {
       this.$router.push({ name: "Home" });
+    },
+    chargingCard() {
+      this.$router.push({ name: "ChargingCard" });
     }
   }
 };

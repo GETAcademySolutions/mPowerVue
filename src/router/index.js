@@ -14,6 +14,7 @@ import UserHistory from '@/components/UserHistory';
 import MPowerMap from '@/components/MPowerMap';
 import ChargePage from '@/components/ChargePage';
 import PortNumberSelection from '@/components/PortNumberSelection';
+import ChargingCard from '@/components/ChargingCard';
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
 
@@ -86,6 +87,11 @@ const router = new Router({
       path: '/portNumberSelection',
       name: 'PortNumberSelection',
       component: PortNumberSelection
+    },
+    {
+      path: '/chargingCard',
+      name: 'ChargingCard',
+      component: ChargingCard
     }
   ]
 });
