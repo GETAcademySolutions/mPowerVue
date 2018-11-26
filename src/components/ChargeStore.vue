@@ -1,6 +1,5 @@
 <template>
     <div class="ChargeStore">
-      <h4>Charges: {{ credits }}</h4>
       <h3>Purchase Charges</h3>
       <div id="feedbackDiv"></div>
     <div>
@@ -19,26 +18,6 @@ export default {
     return {
       credits: this.credits
     };
-  },
-  created() {
-    let user = firebase.auth().currentUser;
-    if (user) {
-      let docRef = db.collection("users").doc(user.uid);
-
-      docRef
-        .get()
-        .then(doc => {
-          if (doc.exists) {
-            this.credits = doc.data().credits;
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-        })
-        .catch(function(error) {
-          console.log("Error getting document:", error);
-        });
-    }
   },
   methods: {
     home() {

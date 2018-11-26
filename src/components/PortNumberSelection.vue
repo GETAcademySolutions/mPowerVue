@@ -7,7 +7,7 @@
         <p id="output"></p>
         <input id="portNumber" type="text" placeholder="Port number" />
         <div id="buttonDiv">
-        <button class="button4" @click="removeCredits(-1)">Credit test</button> 
+        <button class="button4" @click="removeCredits(-1)">Purchase charge</button> 
         </div>
     </div>
 </template>
@@ -17,6 +17,7 @@ import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
+import UserHistory from '@/components/UserHistory';
 export default {
   props: ["controller"],
   data() {
@@ -94,6 +95,12 @@ export default {
       const portNo = myData.getUint8(1);
       const logTxt = 'port ' + portNo + ': success=' + success;
       console.log(logTxt);
+      let oneCharge = new chargeObject
+      onecharge.portNo = portNo;
+      onecharge.chargeTime = Date.now();
+      onecharge.fullyChargedAt = onecharge.chargetime
+      // onecharge.fullyChargedAt + én time
+
       }
     }
   }

@@ -1,9 +1,5 @@
 <template>
     <div class="History">
-        <div class="containmentDivEx">
-            <button class="button2">charges</button>        
-            <button class="button2">code</button>            
-        </div>
         <div class="containmentDiv">
           Info1           
         </div>
@@ -32,9 +28,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.button1 {
-  margin: 0;
-  width: 49.83%;
-}
-</style>
