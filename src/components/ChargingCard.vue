@@ -14,13 +14,6 @@ export default {
     props: ["charges"],
   data() {
     return {
-      chargeObject: {
-          portNo: 0,
-          device: null,
-          chargeTime: null,
-          batteryLevel: null,
-          fullyChargedAt: null
-      }
     };
   }
 };
