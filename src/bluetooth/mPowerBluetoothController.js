@@ -11,7 +11,6 @@ await controller.connect();
 
 class mPowerBluetoothControllerDummy {
 
-
   constructor() {
     this.serviceUuid = '0000f00d-1212-efde-1523-785fef13d123';
     this.options = {
@@ -26,7 +25,9 @@ class mPowerBluetoothControllerDummy {
     this.isConnected = false;
   }
 
-  async connect() {}
+  async connect() {
+    return "mPower"
+  }
 
   async turnOnOrOff(portNo, OnOffValue) {
     console.log('dummy ble turnOnOrOff', portNo, OnOffValue);
@@ -63,8 +64,19 @@ class mPowerBluetoothController {
     this.characteristic = await this.service.getCharacteristic(this.characteristicUuid);
     this.characteristic.addEventListener("characteristic value changed", this.handleNotifications);
     this.isConnected = true;
+    console.log("RETURNER ", device.name);
     return device.name;
   }
+
+  async writeValue(dataArray){
+      const characteristic = await this.service.getCharacteristic(this.characteristicUuid);
+      for(let i = 0; dataArray.length; i++){
+          dataArray[i] = parseInt("0x" + dataArray[i]);
+      }
+      const data = new Uint8Array(dataArray);
+      await characteristic.writeValue(data);
+    }
+
 
   async turnOnOrOff(portNo, OnOffValue) {
     const characteristic = await this.service.getCharacteristic(this.characteristicUuid);
@@ -86,7 +98,9 @@ class mPowerBluetoothController {
 
   async readValue() {
     const characteristic = await this.service.getCharacteristic(this.characteristicUuid);
-    return await characteristic.readValue();
+    var x = await characteristic.readValue();
+    console.log("readValue = ", x);
+    return x;
   }
 }
 export default mPowerBluetoothController;

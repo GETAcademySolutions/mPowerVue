@@ -22,6 +22,8 @@ Vue.use(Router);
 
 //const controller = new mPowerBluetoothController();
 const controller = new mPowerBluetoothControllerDummy();
+//const controller = new PowerstationManager();
+//const controller = new DummyPowerstationManager();
 
 const router = new Router({
   routes: [{
