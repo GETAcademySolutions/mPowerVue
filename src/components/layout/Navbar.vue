@@ -57,27 +57,6 @@ export default {
       credits: null
     };
   },
-  created() {
-    let user = firebase.auth().currentUser;
-    if (user) {
-      let docRef = db.collection("users").doc(user.uid);
-
-      docRef
-        .get()
-        .then(doc => {
-          if (doc.exists) {
-            console.log("got credits: ", doc.data().credits);
-            this.credits = doc.data().credits;
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-        })
-        .catch(function(error) {
-          console.log("Error getting document:", error);
-        });
-    }
-  },
   computed: {},
   methods: {
     logout() {
@@ -132,7 +111,6 @@ export default {
         .get()
         .then(doc => {
           if (doc.exists) {
-            console.log("got credits: ", doc.data().credits);
             this.credits = doc.data().credits;
           } else {
             // doc.data() will be undefined in this case
@@ -146,14 +124,11 @@ export default {
     }
   },
   mounted() {
-    console.log("mounted");
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user;
-        this.credits = credits;
       } else {
         this.user = null;
-        this.credits = null;
       }
     });
     // let elems = document.querySelectorAll('.sidenav');
