@@ -21,7 +21,8 @@ class mPowerBluetoothControllerDummy {
       }],
       optionalService: [this.serviceUuid]
     };
-    this.characteristicUuid = "0000beef-1212-efde-1523-785fef13d123";
+    // this.characteristicUuid = "0000beef-1212-efde-1523-785fef13d123";
+    this.characteristicUuid = "0000beee-1212-efde-1523-785fef13d123";
     this.isConnected = false;
   }
 
@@ -53,7 +54,8 @@ class mPowerBluetoothController {
       }],
       optionalService: [this.serviceUuid]
     };
-    this.characteristicUuid = "0000beef-1212-efde-1523-785fef13d123";
+    // this.characteristicUuid = "0000beef-1212-efde-1523-785fef13d123";
+    this.characteristicUuid = "0000beee-1212-efde-1523-785fef13d123";
     this.isConnected = false;
   }
 
@@ -103,5 +105,5 @@ class mPowerBluetoothController {
     return x;
   }
 }
-export default mPowerBluetoothController;
-//export default mPowerBluetoothControllerDummy;
+//export default mPowerBluetoothController;
+export default mPowerBluetoothControllerDummy;

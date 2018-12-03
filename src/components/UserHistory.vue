@@ -1,16 +1,16 @@
 <template>
     <div class="History">
         <div class="containmentDiv">
-          Info1           
+          <h6>ChargingCard1</h6>           
         </div>
         <div class="containmentDiv"> 
-          Info2                     
+          <h6>ChargingCard2</h6>                   
         </div>
         <div class="containmentDiv">  
-          Info3                   
+          <h6>ChargingCard3</h6>          
         </div>
     <div>
-        <button class="button2" @click="chargingCard">ChargingCard</button>
+        <button class="button4" @click="chargingCard">ChargingCard</button>
         </div>
     <div>
         <button class="button2" @click="home">Back</button>

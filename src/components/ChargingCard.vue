@@ -8,21 +8,26 @@
           <h5>Fully charged at <a>{{ item.fullyChargedAt }}</a></h5>
         </div>
       </div>
+      <div>
+        <button class="button2" @click="history">Back</button>
+      </div>
   </div>
 </template>
 
 <script>
 var currentdate = new Date(); 
-var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + " - " 
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-var datetime2 = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + " - " 
-                + (currentdate.getHours()+1) + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+
+var datetime = ('0' + currentdate.getDate()).slice(-2) + "/"
+                + ('0' + (currentdate.getMonth()+1)).slice(-2)  + " - " 
+                + ('0' + (currentdate.getHours())).slice(-2) + ":"  
+                + ('0' + (currentdate.getMinutes())).slice(-2) + ":" 
+                + ('0' + (currentdate.getSeconds())).slice(-2);
+var datetime2 = ('0' + currentdate.getDate()).slice(-2) + "/"
+                + ('0' + (currentdate.getMonth()+1)).slice(-2)  + " - " 
+                + ('0' + (currentdate.getHours()+1)).slice(-2) + ":"  
+                + ('0' + (currentdate.getMinutes())).slice(-2) + ":" 
+                + ('0' + (currentdate.getSeconds())).slice(-2);
+             
 export default {    
   data() {
     return {
@@ -35,6 +40,10 @@ export default {
         }]
     };
   },
-
+  methods: {    
+    history() {
+      this.$router.push({ name: "UserHistory" });
+    }
+  }
 };
 </script>
