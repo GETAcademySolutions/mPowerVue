@@ -27,7 +27,7 @@
           <li id="liNr2" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
           <li id="liNr3" class="sidenav-close" v-if="!user"><router-link :to="{ name: 'Index' }">Index</router-link></li>
           <li id="liNr4" class="sidenav-close" v-if="user"><a @click="home">{{ user.email }}</a></li>
-          <li id="liNr4" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Credits: {{ credits }}</a></li>
+          <li id="liNr5" class="sidenav-close" v-if="user"><a @click="buyChargeTime">Credits: {{ credits }}</a></li>
           <li class="divider green" style="height: 1px;" v-if="user"></li>
           <li id="liNr6" class="sidenav-close" v-if="user"><a @click="home">Home</a></li>
           <li id="liNr7" class="sidenav-close" v-if="user"><a @click="startChargePage">Charge</a></li>
@@ -47,7 +47,6 @@
 import db from "@/firebase/init";
 import firebase from "firebase";
 import "materialize-css";
-import Login from "@/components/Login";
 
 export default {
   name: "Navbar",

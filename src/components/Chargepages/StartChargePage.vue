@@ -18,7 +18,6 @@
     </div>
     <button class="button2" @click="home">Back</button>
   </div>
-  <!--</div>-->
 </template>
 
 <script>
@@ -26,7 +25,7 @@ import db from "@/firebase/init";
 import firebase from "firebase";
 import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
 import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
-import ChargingCard from "@/components/ChargingCard";
+import ChargingCard from "@/components/History/ChargingCard";
 
 export default {
   name: "StartCharge",
@@ -55,7 +54,6 @@ export default {
           if (doc.exists) {
             this.credits = doc.data().credits;
           } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
           }
         })

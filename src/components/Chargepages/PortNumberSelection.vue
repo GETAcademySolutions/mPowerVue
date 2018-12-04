@@ -18,8 +18,6 @@
   import firebase from "firebase";
   import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
   import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
-  import UserHistory from "@/components/UserHistory";
-  import ChargingCard from "@/components/ChargingCard";
   export default {
     props: ["controller"],
     data() {

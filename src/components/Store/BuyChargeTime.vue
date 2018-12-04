@@ -3,12 +3,6 @@
     <h4>Your current balance:</h4>
     <h4>{{ credits }}</h4>
     <div id="feedbackDiv"></div>
-    <div>
-      <button class="smallButton" @click="confirmedPurchase(1)" value="1">1</button>
-      <button class="smallButton" @click="confirmedPurchase(5)" value="5">5</button>
-      <button class="smallButton" @click="confirmedPurchase(10)" value="10">10</button>
-      <button class="smallButton" @click="confirmedPurchase(25)" value="25">25</button>
-    </div>
     <div style="text-align: left;">Select amount</div>
     <p>
       <label for="test1">
