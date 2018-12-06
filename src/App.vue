@@ -213,4 +213,7 @@ input {
   border-radius: 5px;
   min-height: 40px;
 }
+.fontAndInputSize {
+  font-size: 16px;
+}
 </style>

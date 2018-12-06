@@ -28,6 +28,7 @@
   import mPowerBluetoothController from "@/bluetooth/mPowerBluetoothController";
   import mPowerBluetoothControllerDummy from "@/bluetooth/mPowerBluetoothController";
   import ChargingCard from "@/components/History/ChargingCard";
+  //import FireBaseService from "@/components/FireBaseService";
 
   export default {
     name: "StartCharge",

@@ -5,26 +5,26 @@
       <div>Select device</div>
         <p>          
           <label for="test1">
-            <input style="font-size: 16px;" class="with-gap" name="group1" type="radio" id="test1" checked />
+            <input class="with-gap" name="group1" type="radio" id="test1" checked />
             <span style="font-size: 16px;">This phone</span>
           </label>
         </p>
         <p>          
           <label for="test2">
-            <input style="font-size: 16px;" class="with-gap" name="group1" type="radio" id="test2" />
+            <input class="with-gap" name="group1" type="radio" id="test2" />
             <span style="font-size: 16px;">General access</span>
           </label>
         </p>
           <div>Have you already pluggen in your device?</div>
         <p>          
           <label for="test3">
-            <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test3" checked />
+            <input class="with-gap" name="group2" type="radio" id="test3" checked />
             <span style="font-size: 16px;">Yes</span>
           </label>
         </p>
         <p>          
           <label for="test4">
-            <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test4" />
+            <input class="with-gap" name="group2" type="radio" id="test4" />
             <span style="font-size: 16px;">No</span>
           </label>
         </p>
