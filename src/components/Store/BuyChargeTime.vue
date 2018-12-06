@@ -4,29 +4,9 @@
     <h4>{{ credits }}</h4>
     <div id="feedbackDiv"></div>
     <div style="text-align: left;">Select amount</div>
-    <p>
-      <label for="test1">
-        <input style="font-size: 16px;" class="with-gap" @click="confirmedPurchase(1)" name="group1" type="radio" id="test1" checked />
-        <span style="font-size: 16px;">1 Credits</span>
-      </label>
-    </p>
-    <p>
-      <label for="test2">
-        <input style="font-size: 16px;" class="with-gap" @click="confirmedPurchase(5)" name="group1" type="radio" id="test2" />
-        <span style="font-size: 16px;">5 Credits</span>
-      </label>
-    </p>
-    <p>
-      <label for="test3">
-        <input style="font-size: 16px;" class="with-gap" @click="confirmedPurchase(10)" name="group1" type="radio" id="test3" />
-        <span style="font-size: 16px;">10 Credits</span>
-      </label>
-    </p>
-    <p>
-      <label for="test4">
-        <input style="font-size: 16px;" class="with-gap" @click="confirmedPurchase(25)" name="group1" type="radio" id="test4" />
-        <span style="font-size: 16px;">25 Credits</span>
-      </label>
+    <p v-for="possibleAmount in possibleAmounts"  @click="selectedAmount = possibleAmount">
+        <input style="font-size: 16px;" class="with-gap" name="xgroup1" :id="'amountChoice' + possibleAmount" type="radio" v-model="selectedAmount" :value="possibleAmount"/>
+        <span style="font-size: 16px;">{{possibleAmount}} Credits</span>
     </p>
     <div style="text-align: left;">Select payment method</div>
     <p>
@@ -43,7 +23,7 @@
     </p>
     <h5 style="text-align: left;">Payment: $</h5> <!--{{ value }}-->
     <div>
-      <button class="button4" @click="buyCharge">Next</button>
+      <button class="button4" @click="confirmedPurchase()">Next</button>
     </div>
     <div>
       <button class="button2" @click="buyCharge">Back</button>
@@ -61,14 +41,15 @@ export default {
   data() {
     return {
       user: null,
-      credits: this.credits
+      credits: 0,
+      selectedAmount: 1,
+      possibleAmounts: [1,5,10,25],
     };
   },
   created() {
     let user = firebase.auth().currentUser;
     if (user) {
       let docRef = db.collection("users").doc(user.uid);
-
       docRef
         .get()
         .then(doc => {
@@ -86,20 +67,23 @@ export default {
   },
   computed: {},
   methods: {
-    confirmedPurchase(n) {
+    confirmedPurchase() {
       let user = firebase.auth().currentUser;
+      const mySelectedAmount = this.selectedAmount;
+      const newCredits = this.credits + this.selectedAmount;
+      this.credits = newCredits; 
       db.collection("users")
         .doc(user.uid)
         .set(
           {
-            credits: (this.credits += n)
+            credits: newCredits
           },
           {
             merge: true
           }
         )
         .then(function() {
-          console.log("Credits successfully changed by: " + n);
+          console.log("Credits successfully changed by: " + mySelectedAmount);
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);
@@ -116,5 +100,8 @@ export default {
 <style scoped>
 p {
   text-align: left;
+}
+span {
+  font-size: 50px;
 }
 </style>
