@@ -9,25 +9,22 @@
       </div>
     </div>
     <charging-card v-if="charges && !isHidden" v-bind:charges="charges" />
-    <div v-if="isHidden">      
-    <h5>History:</h5>
-    <div v-for="item in charges" class="card blue-gray" style="text-align: left; border: 1px solid black;">
-      <div class="card-content">
-        <p>
-          <b>Port:</b> {{ item.portNo }}
-          <a style="float: right; color: green; font-weight: bold;">{{item.batteryLevel}}</a>
-        </p>
-        <p>
-          <b>Device:</b>
-          <a>{{ item.device }}</a>
-        </p>
-        <p>Started charging at
-          <a>{{ item.chargeTime }}</a>
-        </p>
-        <p>Fully charged at
-          <a>{{ item.fullyChargedAt }}</a>
-        </p>
-      </div></div>
+    <div v-if="isHidden">
+      <h5>History:</h5>
+      <div v-for="item in charges" style="text-align: left;">
+            <a style="font-size: 20px;"><b>{{ item.startDate }} {{ months2[item.monthCount] }}</b></a>
+          <p>
+            {{ item.portNo }}, Kiosk name
+          </p>
+          <p>
+            {{ item.chargeTime }} - {{ item.fullyChargedAt }}
+          </p>
+          <p>
+            {{ item.creditsUsed }} Credit
+          </p>
+            
+    <div class="divider green" style="height: 3px; margin: 5% 0;"></div>
+      </div>
     </div>
     <div>
       <button class="button4" @click="chargingCard">ChargingCard</button>
@@ -40,29 +37,41 @@
 
 <script>
   import ChargingCard from "@/components/History/ChargingCard";
-  
-  var currentdate = new Date();
 
-  var datetime =
-    ("0" + currentdate.getDate()).slice(-2) +
-    "/" +
-    ("0" + (currentdate.getMonth() + 1)).slice(-2) +
-    " - " +
+  var currentdate = new Date();
+  var date =
+    ("0" + currentdate.getDate()).slice(-2);
+
+  var time =
     ("0" + currentdate.getHours()).slice(-2) +
     ":" +
     ("0" + currentdate.getMinutes()).slice(-2) +
     ":" +
     ("0" + currentdate.getSeconds()).slice(-2);
-  var datetime2 =
-    ("0" + currentdate.getDate()).slice(-2) +
-    "/" +
-    ("0" + (currentdate.getMonth() + 1)).slice(-2) +
-    " - " +
+    
+  var date2 =
+    ("0" + currentdate.getDate()).slice(-2);
+
+  var time2 =
     ("0" + (currentdate.getHours() + 1)).slice(-2) +
     ":" +
     ("0" + currentdate.getMinutes()).slice(-2) +
     ":" +
     ("0" + currentdate.getSeconds()).slice(-2);
+
+    // if (currentdate.getMonth() === 1) {currentdate.getMonth() = "January"};
+    // if (currentdate.getMonth() === 2) {currentdate.getMonth() = "February"};
+    // if (currentdate.getMonth() === 3) {currentdate.getMonth() = "Mars"};
+    // if (currentdate.getMonth() === 4) {currentdate.getMonth() = "April"};
+    // if (currentdate.getMonth() === 5) {currentdate.getMonth() = "May"};
+    // if (currentdate.getMonth() === 6) {currentdate.getMonth() = "June"};
+    // if (currentdate.getMonth() === 7) {currentdate.getMonth() = "July"};
+    // if (currentdate.getMonth() === 8) {currentdate.getMonth() = "August"};
+    // if (currentdate.getMonth() === 9) {currentdate.getMonth() = "September"};
+    // if (currentdate.getMonth() === 10) {currentdate.getMonth() = "October"};
+    // if (currentdate.getMonth() === 11) {currentdate.getMonth() = "November"};
+    // if (currentdate.getMonth() === 12) {currentdate.getMonth() = "December"};
+    var getmonth = currentdate.getMonth();
 
   export default {
     name: "History",
@@ -76,21 +85,33 @@
           device: null,
           chargeTime: null,
           batteryLevel: null,
-          fullyChargedAt: null
-        },      
+          fullyChargedAt: null,
+          creditsUsed: null,
+          monthCount: null
+        },
+        months: ['January', 'February', 'March', 'April', 'May', 
+        'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        months2: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
+        'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         charges: [{
             portNo: "portNo",
             batteryLevel: "100%",
             device: "This phone",
-            chargeTime: datetime,
-            fullyChargedAt: datetime2
+            chargeTime: time,
+            startDate: date,
+            creditsUsed: 1,
+            fullyChargedAt: time2,
+            monthCount: getmonth
           },
           {
             portNo: "portNo",
             batteryLevel: "100%",
             device: "This phone",
-            chargeTime: datetime,
-            fullyChargedAt: datetime2
+            chargeTime: time,
+            startDate: date,
+            creditsUsed: 1,
+            fullyChargedAt: time2,
+            monthCount: getmonth
           }
         ]
       };
@@ -114,10 +135,12 @@
 
 </script>
 <style scoped>
-p {
-  font-size: 14px;
-}
-.card-content {
-  padding: 20px 50px;
-}
+  p {
+    font-size: 14px;
+  }
+
+  .card-content {
+    padding: 20px 50px;
+  }
+
 </style>
