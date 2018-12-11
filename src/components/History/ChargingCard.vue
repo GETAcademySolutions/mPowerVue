@@ -1,5 +1,6 @@
 <template>
   <div class="component">
+    <h5>Charging:</h5>
     <div v-for="item in charges" class="card blue-gray" style="text-align: left; border: 1px solid black;">
       <div class="card-content">
         <p>
@@ -102,5 +103,8 @@ p {
 }
 .card-content {
   padding: 20px 50px;
+}
+a:hover {
+  color: red;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="Purchase">
-    <h4>Your current balance:</h4>
-    <h4>{{ credits }}</h4>
+    <h4 style="text-align: left;">Your current balance:</h4>
+    <h4 style="text-align: left;">{{ credits }}</h4>
     <div id="feedbackDiv"></div>
     <div style="text-align: left;">Select amount</div>
     <p v-for="possibleAmount in possibleAmounts"  @click="selectedAmount = possibleAmount">
@@ -21,7 +21,7 @@
         <span style="font-size: 16px;">Paypal</span>
       </label>
     </p>
-    <h5 style="text-align: left;">Payment: $</h5> <!--{{ value }}-->
+    <h5 style="text-align: left;">Payment: ${{ selectedAmount * 0.99 }}</h5> 
     <div>
       <button class="button4" @click="confirmedPurchase()">Next</button>
     </div>
