@@ -1,29 +1,28 @@
 <template>
   <div class="History">
-    <div class="col s12 m6">
-      <div class="card green">
-        <div class="card-action">
-          <a v-on:click="isHidden = false">Charging</a>
-          <a v-on:click="isHidden = true">History</a>
-        </div>
+    <div style="text-align: left;">
+      <h4>Receipts</h4>
+      <div class="row">
+        <p class="toggleMode" v-on:click="isHidden = false" style="margin-right: 15px;">Charging</p>
+        <p class="toggleMode" v-on:click="isHidden = true">History</p>
       </div>
-    </div>
-    <charging-card v-if="charges && !isHidden" v-bind:charges="charges" />
-    <div v-if="isHidden">
-      <h5>History:</h5>
-      <div v-for="item in charges" style="text-align: left;">
-            <a style="font-size: 20px;"><b>{{ item.startDate }} {{ months2[item.monthCount] }}</b></a>
-          <p>
+      <div class="divider green" style="height: 3px; margin: 5% 0;"></div>
+      <charging-card v-if="charges && !isHidden" v-bind:charges="charges" />
+      <div v-if="isHidden">
+        <div v-for="item in charges">
+          <h5><b>{{ item.startDate }} {{ months2[item.monthCount] }}</b></h5>
+          <h6>
             {{ item.portNo }}, Kiosk name
-          </p>
-          <p>
+          </h6>
+          <h6>
             {{ item.chargeTime }} - {{ item.fullyChargedAt }}
-          </p>
-          <p>
+          </h6>
+          <h6>
             {{ item.creditsUsed }} Credit
-          </p>
-            
-    <div class="divider green" style="height: 3px; margin: 5% 0;"></div>
+          </h6>
+
+          <div class="divider green" style="height: 3px; margin: 5% 0;"></div>
+        </div>
       </div>
     </div>
     <div>
@@ -45,33 +44,22 @@
   var time =
     ("0" + currentdate.getHours()).slice(-2) +
     ":" +
-    ("0" + currentdate.getMinutes()).slice(-2) +
-    ":" +
-    ("0" + currentdate.getSeconds()).slice(-2);
-    
+    ("0" + currentdate.getMinutes()).slice(-2)
+  //  +    
+  // ":" +
+  // ("0" + currentdate.getSeconds()).slice(-2);
+
   var date2 =
     ("0" + currentdate.getDate()).slice(-2);
 
   var time2 =
     ("0" + (currentdate.getHours() + 1)).slice(-2) +
     ":" +
-    ("0" + currentdate.getMinutes()).slice(-2) +
-    ":" +
-    ("0" + currentdate.getSeconds()).slice(-2);
-
-    // if (currentdate.getMonth() === 1) {currentdate.getMonth() = "January"};
-    // if (currentdate.getMonth() === 2) {currentdate.getMonth() = "February"};
-    // if (currentdate.getMonth() === 3) {currentdate.getMonth() = "Mars"};
-    // if (currentdate.getMonth() === 4) {currentdate.getMonth() = "April"};
-    // if (currentdate.getMonth() === 5) {currentdate.getMonth() = "May"};
-    // if (currentdate.getMonth() === 6) {currentdate.getMonth() = "June"};
-    // if (currentdate.getMonth() === 7) {currentdate.getMonth() = "July"};
-    // if (currentdate.getMonth() === 8) {currentdate.getMonth() = "August"};
-    // if (currentdate.getMonth() === 9) {currentdate.getMonth() = "September"};
-    // if (currentdate.getMonth() === 10) {currentdate.getMonth() = "October"};
-    // if (currentdate.getMonth() === 11) {currentdate.getMonth() = "November"};
-    // if (currentdate.getMonth() === 12) {currentdate.getMonth() = "December"};
-    var getmonth = currentdate.getMonth();
+    ("0" + currentdate.getMinutes()).slice(-2)
+  //  +
+  // ":" +
+  // ("0" + currentdate.getSeconds()).slice(-2);
+  var getmonth = currentdate.getMonth();
 
   export default {
     name: "History",
@@ -89,10 +77,12 @@
           creditsUsed: null,
           monthCount: null
         },
-        months: ['January', 'February', 'March', 'April', 'May', 
-        'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        months2: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
-        'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        months: ['January', 'February', 'March', 'April', 'May',
+          'June', 'July', 'August', 'September', 'October', 'November', 'December'
+        ],
+        months2: ['Jan', 'Feb', 'Mar', 'Apr', 'May',
+          'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ],
         charges: [{
             portNo: "portNo",
             batteryLevel: "100%",
@@ -136,11 +126,18 @@
 </script>
 <style scoped>
   p {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .card-content {
     padding: 20px 50px;
+  }
+
+  .toggleMode {
+    color: #999999;
+  }
+  .toggleMode:active {
+    color: black;
   }
 
 </style>
