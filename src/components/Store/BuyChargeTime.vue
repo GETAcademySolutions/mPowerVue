@@ -1,27 +1,27 @@
 <template>
   <div class="Purchase">
-    <h4 style="text-align: left;">Your current balance:</h4>
-    <h4 style="text-align: left;">{{ credits }}</h4>
+    <h4 class="alignmentLeft">Your current balance:</h4>
+    <h4 class="alignmentLeft">{{ credits }}</h4>
     <div id="feedbackDiv"></div>
-    <div style="text-align: left;">Select amount</div>
-    <p v-for="possibleAmount in possibleAmounts"  @click="selectedAmount = possibleAmount">
-        <input style="font-size: 16px;" class="with-gap" name="xgroup1" :id="'amountChoice' + possibleAmount" type="radio" v-model="selectedAmount" :value="possibleAmount"/>
-        <span style="font-size: 16px;">{{possibleAmount}} Credits</span>
+    <div class="alignmentLeft">Select amount</div>
+    <p class="inputDiv" v-for="possibleAmount in possibleAmounts"  @click="selectedAmount = possibleAmount">
+        <input class="with-gap" name="xgroup1" :id="'amountChoice' + possibleAmount" type="radio" v-model="selectedAmount" :value="possibleAmount"/>
+        <span>{{possibleAmount}} Credits</span>
     </p>
-    <div style="text-align: left;">Select payment method</div>
-    <p>
+    <div class="alignmentLeft">Select payment method</div>
+    <p class="inputDiv">
       <label for="test5">
-        <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test5" checked />
-        <span style="font-size: 16px;">mPesa</span>
+        <input class="with-gap" name="group2" type="radio" id="test5" checked />
+        <span>mPesa</span>
       </label>
     </p>
-    <p>
+    <p class="inputDiv">
       <label for="test6">
-        <input style="font-size: 16px;" class="with-gap" name="group2" type="radio" id="test6" />
-        <span style="font-size: 16px;">Paypal</span>
+        <input class="with-gap" name="group2" type="radio" id="test6" />
+        <span>Paypal</span>
       </label>
     </p>
-    <h5 style="text-align: left;">Payment: ${{ selectedAmount * 0.99 }}</h5> 
+    <h5 class="alignmentLeft">Payment: ${{ selectedAmount * 0.99 }}</h5> 
     <div>
       <button class="button4" @click="confirmedPurchase()">Next</button>
     </div>
@@ -103,5 +103,11 @@ p {
 }
 span {
   font-size: 50px;
+}
+.inputDiv {
+  font-size: 16px;
+}
+.alignmentLeft {
+  text-align: left;
 }
 </style>
